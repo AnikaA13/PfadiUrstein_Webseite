@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavComponent } from './nav/nav.component';
-import { ImpressumComponent } from './impressum/impressum.component';
+import { NavBarComponent } from './shared/ui/nav-bar/nav-bar.component';
+import { ImpressumComponent } from './shared/ui/impressum/impressum.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, ImpressumComponent],
+  imports: [RouterOutlet, NavBarComponent, ImpressumComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

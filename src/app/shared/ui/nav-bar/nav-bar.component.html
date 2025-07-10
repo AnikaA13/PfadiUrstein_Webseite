@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md justify-content-between sticky-top bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../../../../assets/Pictures/Logo.jpg" width="30px" alt="logo">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation-bar"
+            aria-controls="navigation-bar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navigation-bar">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['aktivitaeten']" routerLinkActive="active">Aktivitäten</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" [routerLink]="['ueber-uns']" routerLinkActive="active"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">Über uns</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Pfadi Urstein</a></li>
+                        <li><a class="dropdown-item" href="#">Leiterteam</a></li>
+                        <li><a class="dropdown-item" href="#">Elternkomitee</a></li>
+                        <li><a class="dropdown-item" href="#">APV</a></li>
+                        <li><a class="dropdown-item" href="#">Stufen</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['downloads']" routerLinkActive="active">Downloads</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['kontakt']" routerLinkActive="active">Kontakt</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

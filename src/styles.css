@@ -1,0 +1,16 @@
+:root {
+  --background1: #995052;
+}
+
+* {
+  background-color: var(--background1);
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}

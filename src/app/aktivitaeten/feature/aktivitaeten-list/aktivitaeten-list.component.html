@@ -1,1 +1,150 @@
-<p>aktivitaeten-list works!</p>
+<app-header>
+    Aktivitäten
+</app-header>
+
+<app-page-card>
+    <div class="flex flex-col md:flex-row gap-6 w-full py-4 overflow-x-auto px-4">
+
+        <div
+            class="flex-1 bg-white border-t-4 border-red-500 rounded-xl shadow-md p-6 min-w-[280px] flex flex-col justify-between hover:shadow-lg transition-shadow">
+            <div class="space-y-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="text-2xl font-bold text-gray-800">Biberstufe</h2>
+                    <span class="bg-red-100 text-red-600 p-2 rounded-full">🦦</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 text-red-500 font-bold">📅</div>
+                    <div>
+                        <p class="font-semibold text-gray-900">17.01.2026</p>
+                        <p class="text-gray-600 italic">Winterwanderung</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 border-t pt-4">
+                    <div class="mt-1">🎒</div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-700 uppercase tracking-wide">Mitnehmen:</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Warme Kleidung, Rucksackverpflegung</p>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="mt-6 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                Anmelden <span class="text-xs">▼</span>
+            </button>
+        </div>
+
+        <div
+            class="flex-1 bg-white border-t-4 border-orange-400 rounded-xl shadow-md p-6 min-w-[280px] flex flex-col justify-between hover:shadow-lg transition-shadow">
+            <div class="space-y-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="text-2xl font-bold text-gray-800">Wolfsstufe</h2>
+                    <span class="bg-orange-100 text-orange-600 p-2 rounded-full">🐺</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 text-orange-500 font-bold">📅</div>
+                    <div>
+                        <p class="font-semibold text-gray-900">17.01.2026</p>
+                        <p class="text-gray-600 italic">Winterwanderung</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 border-t pt-4">
+                    <div class="mt-1">🎒</div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-700 uppercase tracking-wide">Mitnehmen:</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Warme Kleidung, Rucksackverpflegung</p>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="mt-6 w-full bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                Anmelden <span class="text-xs">▼</span>
+            </button>
+        </div>
+
+        <div
+            class="flex-1 bg-white border-t-4 border-green-600 rounded-xl shadow-md p-6 min-w-[280px] flex flex-col justify-between hover:shadow-lg transition-shadow">
+            <div class="space-y-4">
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="text-2xl font-bold text-gray-800">Pfadistufe</h2>
+                    <span class="bg-green-100 text-green-600 p-2 rounded-full">⚜️</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 text-green-600 font-bold">📅</div>
+                    <div>
+                        <p class="font-semibold text-gray-900">17.01.2026</p>
+                        <p class="text-gray-600 italic">Winterwanderung</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 border-t pt-4">
+                    <div class="mt-1">🎒</div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-700 uppercase tracking-wide">Mitnehmen:</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Warme Kleidung, Rucksackverpflegung</p>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                Anmelden <span class="text-xs">▼</span>
+            </button>
+        </div>
+
+    </div>
+</app-page-card>
+
+<app-page-card>
+    <div class="p-4 md:p-8">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-2 h-8 bg-blue-600 rounded-full"></div>
+            <h2 class="text-3xl font-bold text-gray-800">Anmeldung zur Aktivität</h2>
+        </div>
+
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="space-y-4">
+                <h3 class="text-lg font-semibold text-gray-700 border-b pb-2">Angaben zum Kind</h3>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Vorname & Nachname</label>
+                    <input type="text" placeholder="z.B. Max Muster"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pfadiname (falls vorhanden)</label>
+                    <input type="text" placeholder="z.B. Nemo"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Stufe</label>
+                    <select
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white">
+                        <option>Biberstufe</option>
+                        <option>Wolfsstufe</option>
+                        <option>Pfadistufe</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Bemerkungen (Allergien etc.)</label>
+                    <textarea rows="1" placeholder="Besonderheiten..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"></textarea>
+                </div>
+            </div>
+
+            <div
+                class="md:col-span-2 mt-4 bg-gray-50 p-4 rounded-xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-gray-500">
+                    Mit dem Absenden bestätige ich die Richtigkeit der Angaben für die Winterwanderung am 17.01.2026.
+                </p>
+                <button type="submit"
+                    class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-full shadow-lg transform hover:scale-105 transition-all">
+                    Definitiv anmelden
+                </button>
+            </div>
+        </form>
+    </div>
+</app-page-card>

@@ -1,0 +1,43 @@
+.bg-navbar {
+  background-color: var(--secondary);
+} /* In your navbar.component.css or styles.css */
+
+.nav-link {
+  /* Base styling for all links: padded, rounded, dark text, transition for smooth hover effect */
+  padding-inline: calc(var(--spacing) * 3);
+  padding-block: calc(var(--spacing) * 2);
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #1e2939; /* text-gray-800 */
+  border-radius: 0.375rem; /* rounded-md */
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+.nav-link:hover {
+  /* Hover state: slightly darker background */
+  background-color: #e5e7eb;
+  color: #101828;
+}
+
+/* Active Link Styling: Applied by Angular's routerLinkActive="active"
+   This makes the currently active link stand out.
+*/
+.active {
+  /* Active state: prominent background color and white text */
+  background-color: rgb(255, 144, 136);
+  color: white;
+}
+
+/* Alternative Tailwind CSS Approach:
+
+.nav-link {
+    @apply px-3 py-2 text-sm font-medium text-gray-800 rounded-md transition duration-150 ease-in-out;
+}
+
+.nav-link:hover {
+    @apply bg-gray-200 text-gray-900;
+}
+
+.active {
+    @apply bg-blue-600 text-white shadow-lg; 
+} */

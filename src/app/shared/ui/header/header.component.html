@@ -1,4 +1,14 @@
-<div>
-  <h1>Headername</h1>
-  <img src="" class="img-fluid" alt="Header Image" />
+<div class="relative w-full overflow-hidden bg-gray-100 rounded-xl shadow-lg mb-8">
+  <div class="relative aspect-21/9 md:aspect-3/1 w-full">
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+      class="absolute inset-0 w-full h-full object-cover" alt="Header Image" />
+
+    <div class="absolute inset-0 bg-black/20"></div>
+
+    <div class="absolute inset-0 flex items-center justify-center">
+      <h1 class="text-white text-3xl md:text-5xl font-bold drop-shadow-lg">
+        <ng-content></ng-content>
+      </h1>
+    </div>
+  </div>
 </div>

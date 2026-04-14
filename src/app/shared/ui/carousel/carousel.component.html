@@ -3,11 +3,13 @@
   <div class="flex flex-nowrap transition-transform duration-700 ease-in-out"
     [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
 
-    <div *ngFor="let slide of slides" class="w-full shrink-0">
-      <div class="relative aspect-21/9 md:aspect-3/1 w-full">
-        <img [src]="slide.url" [alt]="slide.title" class="absolute inset-0 w-full h-full object-cover" />
+    @for (slide of slides; track slide) {
+      <div class="w-full shrink-0">
+        <div class="relative aspect-21/9 md:aspect-3/1 w-full">
+          <img [src]="slide.url" [alt]="slide.title" class="absolute inset-0 w-full h-full object-cover" />
+        </div>
       </div>
-    </div>
+    }
   </div>
 
   <button (click)="prev()"
@@ -27,9 +29,11 @@
   </button>
 
   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex space-x-3">
-    <button *ngFor="let slide of slides; let i = index" (click)="goToSlide(i)"
-      [class]="i === currentIndex ? 'bg-white w-8' : 'bg-white/50 w-3'"
-      class="h-1.5 rounded-full transition-all duration-500">
-    </button>
+    @for (slide of slides; track slide; let i = $index) {
+      <button (click)="goToSlide(i)"
+        [class]="i === currentIndex ? 'bg-white w-8' : 'bg-white/50 w-3'"
+        class="h-1.5 rounded-full transition-all duration-500">
+      </button>
+    }
   </div>
 </div>

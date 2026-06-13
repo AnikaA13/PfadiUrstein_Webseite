@@ -1,0 +1,15 @@
+<app-header>Pfadi Urstein - Elternkomitee</app-header>
+
+<div class="p-6 lg:p-10">
+  <h2 class="text-2xl font-semibold text-white mb-6">Elternkomitee</h2>
+  <div class="flex flex-wrap gap-4">
+    @for (person of mitglieder(); track person.pfadiname) {
+      <app-leiter-profil
+        [person]="person"
+        [cardId]="'ek-' + person.pfadiname"
+        [flipped]="flippedCard() === 'ek-' + person.pfadiname"
+        (cardClick)="onCardClick($event)"
+      />
+    }
+  </div>
+</div>

@@ -1,1 +1,105 @@
-<p>kontakt-list works!</p>
+<app-header>Pfadi Urstein - Kontakt</app-header>
+
+<div class="p-6 lg:p-10 flex flex-col gap-8 max-w-5xl mx-auto">
+
+  <!-- Top row: form + contacts -->
+  <div class="flex flex-col lg:flex-row gap-6">
+
+    <!-- Contact form -->
+    <app-page-card>
+      <div class="p-6 flex flex-col gap-4 w-full">
+        <h2 class="text-2xl font-bold text-black">Nachricht senden</h2>
+
+        @if (sent()) {
+          <div class="bg-green-100 border border-green-400 text-green-800 rounded p-4 font-semibold text-center">
+            ✅ Nachricht gesendet! Wir melden uns bald.
+          </div>
+        } @else {
+          <label class="flex flex-col gap-1 text-sm font-medium text-gray-800">
+            Name *
+            <input type="text" [value]="form().name" (input)="update('name', $any($event.target).value)"
+              class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1]"
+              placeholder="Vor- und Nachname" />
+          </label>
+          <label class="flex flex-col gap-1 text-sm font-medium text-gray-800">
+            E-Mail *
+            <input type="email" [value]="form().email" (input)="update('email', $any($event.target).value)"
+              class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1]"
+              placeholder="deine@email.ch" />
+          </label>
+          <label class="flex flex-col gap-1 text-sm font-medium text-gray-800">
+            Nachricht *
+            <textarea [value]="form().message" (input)="update('message', $any($event.target).value)"
+              rows="5" placeholder="Deine Frage oder Nachricht..."
+              class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1] resize-none"></textarea>
+          </label>
+          <button (click)="submit()" [disabled]="!isValid()"
+            class="bg-[--background1] text-white rounded py-2 px-6 font-semibold hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed self-start">
+            Senden
+          </button>
+        }
+      </div>
+    </app-page-card>
+
+    <!-- Contact addresses -->
+    <app-page-card>
+      <div class="p-6 flex flex-col gap-5 w-full lg:w-80 shrink-0">
+        <h2 class="text-2xl font-bold text-black">Kontaktadressen</h2>
+
+        <div class="flex flex-col gap-1">
+          <p class="font-semibold text-sm">Pfadi Urstein Herisau</p>
+          <p class="text-gray-600 text-sm">Schwellbrunnerstrasse 25</p>
+          <p class="text-gray-600 text-sm">9100 Herisau</p>
+        </div>
+
+        <hr class="border-gray-200" />
+
+        <div class="flex flex-col gap-3">
+          <p class="font-bold text-sm text-[--background1] uppercase tracking-wide">Abteilungsleitung</p>
+          <div class="flex flex-col gap-1">
+            <p class="font-semibold text-sm">Peider Baumann v/o Charlie</p>
+            <a href="mailto:abteilungsleiter@pfadiherisau.ch" class="text-xs text-[--background1] hover:underline">abteilungsleiter@pfadiherisau.ch</a>
+          </div>
+          <div class="flex flex-col gap-1">
+            <p class="font-semibold text-sm">Andrina Aepli v/o Saphira</p>
+            <a href="mailto:abteilungsleiter@pfadiherisau.ch" class="text-xs text-[--background1] hover:underline">abteilungsleiter@pfadiherisau.ch</a>
+          </div>
+          <a routerLink="/leiterteam" class="text-xs font-semibold text-[--background1] hover:underline">→ Ganzes Leiterteam ansehen</a>
+        </div>
+
+        <hr class="border-gray-200" />
+
+        <div class="flex flex-col gap-2">
+          <p class="font-bold text-sm text-[--background1] uppercase tracking-wide">Elternkomitee</p>
+          <div class="flex flex-col gap-1">
+            <p class="font-semibold text-sm">Christian Hartmann</p>
+            <p class="text-gray-600 text-xs">Präsident</p>
+            <p class="text-gray-600 text-sm">Moosmühlestrasse 1, 9112 Schachen</p>
+          </div>
+          <a routerLink="/elternkomitee" class="text-xs font-semibold text-[--background1] hover:underline">→ Ganzes Elternkomitee ansehen</a>
+        </div>
+
+        <hr class="border-gray-200" />
+
+        <div class="flex flex-col gap-1">
+          <p class="font-bold text-sm text-[--background1] uppercase tracking-wide">Webseite</p>
+          <p class="font-semibold text-sm">Jakob Meier v/o Joker</p>
+          <a href="mailto:webmaster@pfadiherisau.ch" class="text-xs text-[--background1] hover:underline">webmaster@pfadiherisau.ch</a>
+        </div>
+      </div>
+    </app-page-card>
+
+  </div>
+
+  <!-- Datenschutz -->
+  <app-page-card>
+    <div class="p-6 flex flex-col gap-3 w-full">
+      <h2 class="text-2xl font-bold text-black">Datenschutz</h2>
+      <p class="text-gray-700 text-sm leading-relaxed">Für unseren Vereinsalltag ist die Verwaltung von Personendaten unserer Vereinsmitgliedern erforderlich. Die Daten werden eigenwillig von den Mitgliedern über entsprechende Formulare angegeben.</p>
+      <p class="text-gray-700 text-sm leading-relaxed">Alle Mitglieder der Pfadi Herisau werden auch beim Pfadi Bund Schweiz (PBS) angemeldet. Die dafür benötigten Personendaten werden für diesen Zweck an den PBS weitergegeben.</p>
+      <p class="text-gray-700 text-sm leading-relaxed">Beim Besuch unserer Webseite werden keine Cookies in Ihrem Browser hinterlegt und es werden keine persönlichen Daten über die Besucher gespeichert. Wir verwenden keine Techniken zur Wiedererkennung oder Verfolgung von Besuchern.</p>
+      <p class="text-gray-700 text-sm leading-relaxed">Gestützt auf Artikel 13 der schweizerischen Bundesverfassung und die datenschutzrechtlichen Bestimmungen des Bundes (DSG) hat jede Person Anspruch auf Schutz ihrer Privatsphäre. Persönliche Daten werden streng vertraulich behandelt und weder an Dritte verkauft noch weitergegeben (Ausnahme PBS).</p>
+    </div>
+  </app-page-card>
+
+</div>

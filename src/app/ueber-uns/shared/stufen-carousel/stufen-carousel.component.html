@@ -1,0 +1,25 @@
+<div class="relative w-full overflow-hidden rounded-lg shadow-md select-none">
+  <img [src]="current()" alt="Stufe Bild" class="w-full h-72 object-cover transition-all duration-300" />
+
+  <!-- Prev / Next -->
+  <button (click)="prev()"
+    class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-9 h-9 flex items-center justify-center text-lg transition">
+    ‹
+  </button>
+  <button (click)="next()"
+    class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-9 h-9 flex items-center justify-center text-lg transition">
+    ›
+  </button>
+
+  <!-- Dots -->
+  <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+    @for (img of images(); track $index) {
+      <button
+        (click)="goTo($index)"
+        [class.bg-white]="currentIndex() === $index"
+        [class.bg-white\/40]="currentIndex() !== $index"
+        class="w-2.5 h-2.5 rounded-full transition-all">
+      </button>
+    }
+  </div>
+</div>

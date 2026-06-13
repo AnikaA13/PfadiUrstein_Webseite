@@ -1,1 +1,37 @@
-<p>ueber-uns-leiterteam works!</p>
+<app-header>
+  Pfadi Urstein - Leiterteam
+</app-header>
+
+<!-- Abteilungsleitung -->
+@if (abteilungsleitung().length > 0) {
+  <section class="px-8 py-6">
+    <h2 class="text-2xl font-semibold text-white mb-4">Abteilungsleitung</h2>
+    <div class="flex flex-wrap gap-4">
+      @for (person of abteilungsleitung(); track person.pfadiname) {
+        <app-leiter-profil
+          [person]="person"
+          [cardId]="'abteilung-' + person.pfadiname"
+          [flipped]="flippedCard() === 'abteilung-' + person.pfadiname"
+          (cardClick)="onCardClick($event)"
+        />
+      }
+    </div>
+  </section>
+}
+
+<!-- Stufen -->
+@for (stufe of stufen(); track stufe.name) {
+  <section class="px-8 py-6">
+    <h2 class="text-2xl font-semibold text-white mb-4">{{ stufe.name }}</h2>
+    <div class="flex flex-wrap gap-4">
+      @for (person of stufe.leiter; track person.pfadiname) {
+        <app-leiter-profil
+          [person]="person"
+          [cardId]="stufe.name + '-' + person.pfadiname"
+          [flipped]="flippedCard() === stufe.name + '-' + person.pfadiname"
+          (cardClick)="onCardClick($event)"
+        />
+      }
+    </div>
+  </section>
+}

@@ -1,1 +1,183 @@
-<p>shop-list works!</p>
+<app-header>Pfadi Urstein - Shop</app-header>
+
+<div class="flex flex-col lg:flex-row gap-6 p-6 lg:p-10">
+
+  <!-- Product Grid -->
+  <div class="flex-1">
+    <h2 class="text-2xl font-semibold text-white mb-6">Unsere Produkte</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+
+      @for (product of products; track product.id) {
+        <div class="bg-(--secondary) rounded-lg overflow-hidden shadow-md flex flex-col">
+          <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-48 object-cover" />
+
+          <div class="p-4 flex flex-col gap-3 flex-1">
+            <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+            <p class="text-[--background1] font-bold text-xl">CHF {{ product.price }}.–</p>
+
+            @if (product.hasSizes) {
+              <div class="flex gap-2 flex-wrap">
+                @for (size of product.sizes; track size) {
+                  <button
+                    (click)="selectSize(product.id, size)"
+                    [class.bg-\[--background1\]]="selectedSizes()[product.id] === size"
+                    [class.text-white]="selectedSizes()[product.id] === size"
+                    class="border border-[--background1] rounded px-3 py-1 text-sm font-medium hover:bg-[--background1] hover:text-white transition-colors"
+                  >
+                    {{ size }}
+                  </button>
+                }
+              </div>
+              @if (product.hasSizes && !selectedSizes()[product.id]) {
+                <p class="text-xs text-red-700">Bitte Grösse wählen</p>
+              }
+            }
+
+            <button
+              (click)="addToCart(product)"
+              [disabled]="product.hasSizes && !selectedSizes()[product.id]"
+              class="mt-auto bg-[--background1] text-white rounded py-2 px-4 font-semibold hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              In den Warenkorb
+            </button>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div class="lg:w-80 shrink-0">
+    <div class="bg-(--secondary) rounded-lg p-5 shadow-md sticky top-6">
+      <h2 class="text-xl font-semibold mb-4">
+        Warenkorb
+        @if (cartCount() > 0) {
+          <span class="ml-2 bg-[--background1] text-white text-sm rounded-full px-2 py-0.5">{{ cartCount() }}</span>
+        }
+      </h2>
+
+      @if (cart().length === 0) {
+        <p class="text-sm text-gray-600">Noch nichts im Warenkorb.</p>
+      } @else {
+        <div class="flex flex-col gap-3 mb-4">
+          @for (item of cart(); track item) {
+            <div class="flex items-center justify-between gap-2 text-sm">
+              <div class="flex-1 min-w-0">
+                <p class="font-medium truncate">{{ item.product.name }}</p>
+                @if (item.size) {
+                  <p class="text-xs text-gray-600">Grösse: {{ item.size }}</p>
+                }
+              </div>
+              <div class="flex items-center gap-1">
+                <button (click)="updateQuantity(item, -1)" class="w-6 h-6 rounded bg-white border border-gray-300 text-sm font-bold leading-none hover:bg-gray-100">−</button>
+                <span class="w-5 text-center">{{ item.quantity }}</span>
+                <button (click)="updateQuantity(item, 1)" class="w-6 h-6 rounded bg-white border border-gray-300 text-sm font-bold leading-none hover:bg-gray-100">+</button>
+              </div>
+              <p class="w-16 text-right font-medium">CHF {{ item.product.price * item.quantity }}.–</p>
+              <button (click)="removeFromCart(item)" class="text-red-600 hover:text-red-800 text-lg leading-none">×</button>
+            </div>
+          }
+        </div>
+
+        <hr class="border-gray-400 mb-3" />
+        <div class="flex justify-between font-bold text-lg mb-4">
+          <span>Total</span>
+          <span>CHF {{ cartTotal() }}.–</span>
+        </div>
+
+        <button
+          (click)="showCheckout.set(true)"
+          class="w-full bg-[--background1] text-white rounded py-2 px-4 font-semibold hover:opacity-80 transition-opacity"
+        >
+          Zur Bestellung
+        </button>
+      }
+    </div>
+  </div>
+
+</div>
+
+<!-- Order Success Banner -->
+@if (orderSent()) {
+  <div class="mx-6 lg:mx-10 mb-6 bg-green-100 border border-green-400 text-green-800 rounded p-4 text-center font-semibold">
+    ✅ Bestellung eingegangen! Wir melden uns per E-Mail.
+  </div>
+}
+
+<!-- Checkout Modal -->
+@if (showCheckout()) {
+  <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto p-6 flex flex-col gap-4">
+
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold">Bestellung aufgeben</h2>
+        <button (click)="showCheckout.set(false)" class="text-gray-500 hover:text-black text-2xl leading-none">×</button>
+      </div>
+
+      <!-- Order summary in modal -->
+      <div class="bg-gray-50 rounded p-3 text-sm flex flex-col gap-1">
+        @for (item of cart(); track item) {
+          <div class="flex justify-between">
+            <span>{{ item.product.name }}{{ item.size ? ' (' + item.size + ')' : '' }} × {{ item.quantity }}</span>
+            <span>CHF {{ item.product.price * item.quantity }}.–</span>
+          </div>
+        }
+        <hr class="my-1 border-gray-300" />
+        <div class="flex justify-between font-bold">
+          <span>Total</span>
+          <span>CHF {{ cartTotal() }}.–</span>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="flex flex-col gap-3">
+        <label class="flex flex-col gap-1 text-sm font-medium">
+          Name *
+          <input type="text" [value]="form().name" (input)="updateForm('name', $any($event.target).value)"
+            class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1]"
+            placeholder="Vor- und Nachname" />
+        </label>
+
+        <label class="flex flex-col gap-1 text-sm font-medium">
+          E-Mail *
+          <input type="email" [value]="form().email" (input)="updateForm('email', $any($event.target).value)"
+            class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1]"
+            placeholder="deine@email.ch" />
+        </label>
+
+        <label class="flex flex-col gap-1 text-sm font-medium">
+          Telefon *
+          <input type="tel" [value]="form().phone" (input)="updateForm('phone', $any($event.target).value)"
+            class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1]"
+            placeholder="+41 79 123 45 67" />
+        </label>
+
+        <label class="flex flex-col gap-1 text-sm font-medium">
+          Adresse <span class="text-gray-400 font-normal">(optional)</span>
+          <input type="text" [value]="form().address" (input)="updateForm('address', $any($event.target).value)"
+            class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1]"
+            placeholder="Strasse, PLZ Ort" />
+        </label>
+
+        <label class="flex flex-col gap-1 text-sm font-medium">
+          Bemerkungen
+          <textarea [value]="form().notes" (input)="updateForm('notes', $any($event.target).value)"
+            class="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[--background1] resize-none"
+            rows="3" placeholder="Weitere Wünsche oder Fragen..."></textarea>
+        </label>
+      </div>
+
+      <p class="text-xs text-gray-500">* Pflichtfelder. Die Bezahlung erfolgt nach Kontaktaufnahme.</p>
+
+      <button
+        (click)="submitOrder()"
+        [disabled]="!isFormValid()"
+        class="w-full bg-[--background1] text-white rounded py-3 font-semibold hover:opacity-80 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+      >
+        Bestellung absenden
+      </button>
+
+    </div>
+  </div>
+}

@@ -1,0 +1,38 @@
+<div class="flip-card" (click)="cardClick.emit(cardId())">
+  <div class="flip-card-inner" [class.flipped]="flipped()">
+
+    <!-- Front -->
+    <div class="flip-card-front bg-(--secondary) flex flex-col items-center p-3 gap-2">
+      <img
+        [src]="person().imageUrl"
+        [alt]="person().name"
+        class="w-full h-44 object-cover rounded"
+      />
+      @if (isStufenleiter()) {
+        <span class="bg-(--background1) text-white text-xs px-2 py-0.5 rounded-full font-semibold">
+          Stufenleiter
+        </span>
+      }
+      <p class="font-semibold text-center text-sm leading-tight">{{ person().name }}</p>
+      <p class="text-xs text-gray-700 italic">v/o {{ person().pfadiname }}</p>
+    </div>
+
+    <!-- Back -->
+    <div class="flip-card-back flex flex-col justify-center gap-2 p-4 text-black">
+      <p class="font-bold text-sm">{{ person().funktion }}</p>
+      <hr class="border-white/30" />
+      <p class="text-xs">🎒 Beruf: {{ person().beruf }}</p>
+      <p class="text-xs">🏕️ In der Pfadi seit {{ person().seitPfadi }}</p>
+      <p class="text-xs">⚜️ Leiter seit {{ person().seitLeiter }}</p>
+      @if (isAbteilungsleitung() || isStufenleiter()) {
+        @if (person().email) {
+          <p class="text-xs">✉️ {{ person().email }}</p>
+        }
+        @if (person().telefon) {
+          <p class="text-xs">📞 {{ person().telefon }}</p>
+        }
+      }
+    </div>
+
+  </div>
+</div>

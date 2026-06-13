@@ -1,9 +1,39 @@
 <nav class="flex bg-navbar w-full h-12 flex-row justify-start items-center fixed top-0 z-50 px-4 shadow-md">
-    <div class="mr-6"><a class="nav-link" [routerLink]="['home']" routerLinkActive="active">Home</a></div>
-    <div class="mr-6"><a class="nav-link" [routerLink]="['ueber-uns']" routerLinkActive="active">Über uns</a></div>
-    <div class="mr-6"><a class="nav-link" [routerLink]="['aktivitaeten']" routerLinkActive="active">Aktivitäten</a>
+
+  <div class="mr-6">
+    <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">Home</a>
+  </div>
+
+  <!-- Über uns with dropdown -->
+  <div class="relative group mr-6">
+    <a class="nav-link flex items-center gap-1" [routerLink]="['ueber-uns']" routerLinkActive="active">
+      Über uns
+      <span class="text-xs transition-transform duration-200 group-hover:rotate-180">▾</span>
+    </a>
+    <div class="dropdown">
+      <a class="dropdown-link" [routerLink]="['ueber-uns']" routerLinkActive="dropdown-active" [routerLinkActiveOptions]="{ exact: true }">Übersicht</a>
+      <a class="dropdown-link" [routerLink]="['leiterteam']" routerLinkActive="dropdown-active">Leiterteam</a>
+      <a class="dropdown-link" [routerLink]="['stufen']" routerLinkActive="dropdown-active">Stufen</a>
+      <a class="dropdown-link" [routerLink]="['abteilungskomitee']" routerLinkActive="dropdown-active">Abteilungskomitee</a>
+      <a class="dropdown-link" [routerLink]="['elternkomitee']" routerLinkActive="dropdown-active">Elternkomitee</a>
+      <a class="dropdown-link" [routerLink]="['apv']" routerLinkActive="dropdown-active">APV</a>
     </div>
-    <div class="mr-6"><a class="nav-link" [routerLink]="['downloads']" routerLinkActive="active">Downloads</a></div>
-    <div class="mr-6"><a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Shop</a></div>
-    <div><a class="nav-link" [routerLink]="['kontakt']" routerLinkActive="active">Kontakt</a></div>
+  </div>
+
+  <div class="mr-6">
+    <a class="nav-link" [routerLink]="['aktivitaeten']" routerLinkActive="active">Aktivitäten</a>
+  </div>
+
+  <div class="mr-6">
+    <a class="nav-link" [routerLink]="['downloads']" routerLinkActive="active">Downloads</a>
+  </div>
+
+  <div class="mr-6">
+    <a class="nav-link" [routerLink]="['shop']" routerLinkActive="active">Shop</a>
+  </div>
+
+  <div>
+    <a class="nav-link" [routerLink]="['kontakt']" routerLinkActive="active">Kontakt</a>
+  </div>
+
 </nav>

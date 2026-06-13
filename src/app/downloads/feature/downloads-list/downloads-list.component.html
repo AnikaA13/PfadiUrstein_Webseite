@@ -1,5 +1,60 @@
-<app-header>
-    Downloads
-</app-header>
+<app-header>Pfadi Urstein - Downloads</app-header>
 
-<h1>Downloads</h1>
+<div class="p-6 lg:p-10 max-w-4xl mx-auto flex flex-col gap-4">
+  <h2 class="text-2xl font-semibold text-white mb-2">Dokumente</h2>
+
+  @for (doc of downloads; track doc.id) {
+    <app-page-card>
+      <div class="w-full flex flex-col">
+
+        <!-- Row -->
+        <div class="flex items-center gap-4 p-4">
+          <!-- PDF icon -->
+          <div class="shrink-0 w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-600 text-2xl font-bold select-none">
+            PDF
+          </div>
+
+          <!-- Info -->
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold text-black truncate">{{ doc.title }}</p>
+            <p class="text-xs text-gray-500">{{ doc.description }}</p>
+            <p class="text-xs text-gray-400 mt-0.5">{{ doc.date }}</p>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              (click)="togglePreview(doc.id)"
+              class="text-sm px-3 py-1.5 rounded border border-[--background1] text-[--background1] hover:bg-[--background1] hover:text-white transition-colors font-medium">
+              {{ previewId() === doc.id ? 'Schliessen' : 'Vorschau' }}
+            </button>
+            <a
+              [href]="safeUrl(doc.filename)"
+              [download]="doc.filename"
+              class="text-sm px-3 py-1.5 rounded bg-[--background1] text-white hover:opacity-80 transition-opacity font-medium">
+              ⬇ Download
+            </a>
+          </div>
+        </div>
+
+        <!-- Inline PDF preview -->
+        @if (previewId() === doc.id) {
+          <div class="border-t border-gray-200 px-4 pb-4 pt-3">
+            <iframe
+              [src]="safeUrl(doc.filename)"
+              class="w-full rounded border border-gray-200"
+              style="height: 500px;"
+              title="{{ doc.title }}">
+              <p class="text-sm text-gray-500 p-4">
+                Vorschau nicht verfügbar.
+                <a [href]="safeUrl(doc.filename)" class="text-[--background1] underline">PDF direkt öffnen</a>
+              </p>
+            </iframe>
+          </div>
+        }
+
+      </div>
+    </app-page-card>
+  }
+
+</div>

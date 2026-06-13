@@ -1,0 +1,57 @@
+@if (stufe(); as s) {
+  <app-header>Pfadi Urstein - {{ s.name }}</app-header>
+
+  <div class="p-6 lg:p-10 flex flex-col gap-10">
+
+    <!-- Hero row: description + carousel -->
+    <div class="flex flex-col lg:flex-row gap-8 items-start">
+      <div class="flex-1 flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full shrink-0" [style.background-color]="s.color"></div>
+          <div>
+            <h2 class="text-3xl font-bold text-white">{{ s.name }}</h2>
+            <p class="text-sm text-white/70">{{ s.ageRange }}</p>
+          </div>
+        </div>
+        <p class="text-white/90 leading-relaxed">{{ s.description }}</p>
+      </div>
+
+      <div class="w-full lg:w-96 shrink-0">
+        <app-stufen-carousel [images]="s.imageUrls" />
+      </div>
+    </div>
+
+    <!-- Activities -->
+    <div>
+      <h3 class="text-2xl font-semibold text-white mb-4">Typische Aktivitäten</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        @for (activity of s.activities; track activity.name) {
+          <div class="bg-(--secondary) rounded-lg p-4 flex flex-col gap-2 shadow">
+            <h4 class="font-bold text-sm" [style.color]="s.color">{{ activity.name }}</h4>
+            <p class="text-sm text-gray-700">{{ activity.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Leiter -->
+    @if (leiter().length > 0) {
+      <div>
+        <h3 class="text-2xl font-semibold text-white mb-4">Unser Leiterteam</h3>
+        <div class="flex flex-wrap gap-4">
+          @for (person of leiter(); track person.pfadiname) {
+            <app-leiter-profil
+              [person]="person"
+              [cardId]="'detail-' + person.pfadiname"
+              [flipped]="flippedCard() === 'detail-' + person.pfadiname"
+              (cardClick)="onCardClick($event)"
+            />
+          }
+        </div>
+      </div>
+    }
+
+  </div>
+} @else {
+  <div class="p-10 text-white text-center">Stufe nicht gefunden.</div>
+}

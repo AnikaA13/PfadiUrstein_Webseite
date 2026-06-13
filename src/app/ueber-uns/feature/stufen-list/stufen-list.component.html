@@ -1,0 +1,17 @@
+<app-header>Pfadi Urstein - Stufen</app-header>
+
+<div class="p-8">
+  <h2 class="text-2xl font-semibold text-white mb-6">Unsere Stufen</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+    @for (stufe of stufen; track stufe.id) {
+      <a [routerLink]="['/stufen', stufe.id]"
+        class="bg-(--secondary) rounded-lg p-6 flex flex-col gap-3 shadow-md hover:scale-105 transition-transform cursor-pointer no-underline text-black">
+        <div class="w-12 h-12 rounded-full" [style.background-color]="stufe.color"></div>
+        <h3 class="text-xl font-bold">{{ stufe.name }}</h3>
+        <p class="text-sm text-gray-700">{{ stufe.ageRange }}</p>
+        <p class="text-sm line-clamp-3">{{ stufe.description }}</p>
+        <span class="mt-auto text-sm font-semibold" [style.color]="stufe.color">Mehr erfahren →</span>
+      </a>
+    }
+  </div>
+</div>
